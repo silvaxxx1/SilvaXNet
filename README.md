@@ -1,7 +1,3 @@
-Here's a polished README for SilvaNet, incorporating the provided example:
-
----
-
 # SilvaNet 🌟
 
 Welcome to SilvaNet, a lightweight Python library designed to make deep learning concepts easy to grasp and apply. Whether you’re diving into neural networks for the first time or looking to streamline your educational tools, SilvaNet offers a simplified framework for constructing, training, and evaluating models.
