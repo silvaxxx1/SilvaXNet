@@ -1,24 +1,34 @@
 # SilvaNet 🌟
 
-Welcome to SilvaNet, a lightweight Python library designed to make deep learning concepts easy to grasp and apply. Whether you’re diving into neural networks for the first time or looking to streamline your educational tools, SilvaNet offers a simplified framework for constructing, training, and evaluating models.
+Welcome to **SilvaNet**, a lightweight Python library designed to make deep learning concepts easy to grasp and apply. Whether you’re diving into neural networks for the first time or looking to streamline your educational tools, SilvaNet offers a simplified framework for constructing, training, and evaluating models. It’s intuitive, extensible, and an excellent resource for both beginners and advanced practitioners.
 
-## Key Features
+![SilvaNet](./ANN.png)
 
-- **Autograd Support**: Enjoy seamless gradient computation with our autograd-enabled tensor class, simplifying backpropagation and model training.
+## 🚀 New Features & Upcoming Updates
+
+- **Redesigned API**: We're currently redesigning SilvaNet's API to make it more familiar to PyTorch users. This change aims to offer a more intuitive interface for deep learning tasks.
   
-- **Intuitive API**: Build neural networks effortlessly with our user-friendly API. Create models, apply operations, and handle data with minimal code.
+- **CNN Layers (Numpy Implementation)**: Stay tuned for the addition of convolutional layers, all implemented purely in NumPy! Aiming to provide a deeper understanding of how convolutional operations work under the hood.
 
-- **Element-wise Operations**: Perform a variety of element-wise operations such as addition, subtraction, and multiplication on tensors.
+- **Notebooks for Exploration**: A set of Jupyter notebooks will be provided for further exploration. These will guide you through building models, training, and experimenting with various layers and functions.
 
-- **Activation Functions**: Utilize essential activation functions like sigmoid, tanh, and ReLU to introduce non-linearity into your models.
+## 🌟 Key Features
 
-- **Loss Functions**: Implement popular loss functions such as softmax cross-entropy for classification tasks and optimize your models effectively.
+- **Autograd Support**: Effortlessly perform backpropagation with our autograd-enabled tensor class. This supports seamless gradient computation and simplifies model training.
+  
+- **Intuitive API**: Build neural networks easily with our user-friendly API. You can create, train, and evaluate models with minimal code. Our API is undergoing a redesign to offer better compatibility with PyTorch.
 
-- **Flexible and Extensible**: Customize your neural network with different layers, activation functions, and optimization algorithms. SilvaNet encourages experimentation.
+- **Element-wise Operations**: Perform basic element-wise operations such as addition, subtraction, and multiplication directly on tensors.
 
-- **Model Management**: Save and load your trained models easily, enabling efficient reuse and sharing.
+- **Activation Functions**: Use essential activation functions like Sigmoid, Tanh, and ReLU to introduce non-linearity into your models.
 
-## Getting Started
+- **Loss Functions**: Implement popular loss functions such as Cross-Entropy for classification tasks, providing flexibility for model optimization.
+
+- **Flexible and Extensible**: SilvaNet is highly customizable. You can create your own neural network architectures, add layers, experiment with different activation functions, and explore optimization algorithms.
+
+- **Model Management**: Effortlessly save and load trained models. This makes it easy to reuse and share your models across different projects.
+
+## 🚀 Getting Started
 
 Here’s a quick example to get you started with SilvaNet:
 
@@ -70,23 +80,23 @@ nn.fit(X_train, y_train, epochs=100, batch_size=16)
 nn.evaluate(X_test, y_test)
 ```
 
-## Installation
+## ⚙️ Installation
 
-Install SilvaNet using pip:
+To install **SilvaNet**, simply clone the repository:
 
 ```bash
-git clone https://github.com/silvaxxx1/SilavaNet
+git clone https://github.com/silvaxxx1/SilvaNet
+cd SilvaNet
 ```
 
-## Documentation
+## 📚 Documentation
 
-For detailed guides and API references, visit our [documentation](link-to-documentation).
+For detailed guides, installation instructions, and API references, check out our full [documentation](link-to-documentation).
 
-## Contributing
+## 🤝 Contributing
 
-We welcome contributions! If you have suggestions, bug reports, or want to contribute code, please review our [contributing guidelines](link-to-contributing-guidelines).
+We welcome contributions from the community! If you have suggestions, bug reports, or want to help enhance SilvaNet, please review our [contributing guidelines](link-to-contributing-guidelines). We’re excited to collaborate with you!
 
-## License
+## 📝 License
 
 SilvaNet is licensed under the [MIT License](link-to-license). See the LICENSE file for more details.
-
