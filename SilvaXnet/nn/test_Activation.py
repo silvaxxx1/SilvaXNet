@@ -1,15 +1,14 @@
 import cupy as cp
 import pytest
-from Activation import Relu, Sigmoid, Tanh, Leaky_relu  # Update the import statement to match your module structure
+from Activation import Relu, Sigmoid, Tanh, LeakyRelu  # Correct the import names according to the new module structure
 
-
-@pytest.mark.parametrize("activation_class", [Relu, Sigmoid, Tanh, Leaky_relu])
+@pytest.mark.parametrize("activation_class", [Relu, Sigmoid, Tanh, LeakyRelu])
 def test_forward(activation_class):
     # Create test data
     x = cp.array([[1.0, -1.0, 0.5], [-0.5, 2.0, -1.5]])
 
     # Initialize the activation function, passing default leaky_slope if needed
-    if activation_class == Leaky_relu:
+    if activation_class == LeakyRelu:
         activation = activation_class(leaky_slope=0.01)  # Pass default leaky_slope
     else:
         activation = activation_class()
@@ -24,7 +23,7 @@ def test_forward(activation_class):
         expected_output = 1.0 / (1.0 + cp.exp(-x))
     elif activation_class == Tanh:
         expected_output = cp.tanh(x)
-    elif activation_class == Leaky_relu:
+    elif activation_class == LeakyRelu:
         leaky_slope = 0.01  # Use the same default slope as in initialization
         expected_output = cp.maximum(leaky_slope * x, x)
     
@@ -32,14 +31,14 @@ def test_forward(activation_class):
     cp.testing.assert_allclose(output, expected_output, atol=1e-6)
 
 
-@pytest.mark.parametrize("activation_class", [Relu, Sigmoid, Tanh, Leaky_relu])
+@pytest.mark.parametrize("activation_class", [Relu, Sigmoid, Tanh, LeakyRelu])
 def test_backward(activation_class):
     # Create test data for input and gradient
     x = cp.array([[1.0, -1.0, 0.5], [-0.5, 2.0, -1.5]])
     grad_output = cp.array([[0.1, -0.2, 0.3], [0.4, -0.5, 0.6]])
 
     # Initialize the activation function, passing default leaky_slope if needed
-    if activation_class == Leaky_relu:
+    if activation_class == LeakyRelu:
         activation = activation_class(leaky_slope=0.01)  # Pass default leaky_slope
     else:
         activation = activation_class()
@@ -59,7 +58,7 @@ def test_backward(activation_class):
     elif activation_class == Tanh:
         a = cp.tanh(x)
         grad_expected = grad_output * (1 - a**2)
-    elif activation_class == Leaky_relu:
+    elif activation_class == LeakyRelu:
         grad_expected = grad_output * (x > 0) + grad_output * (x <= 0) * 0.01
 
     # Assert if the backward gradient is correct
@@ -73,7 +72,7 @@ def test_leaky_relu_slope():
     # Test with different leaky slopes
     leaky_slopes = [0.01, 0.1, 0.2]
     for slope in leaky_slopes:
-        activation = Leaky_relu(leaky_slope=slope)
+        activation = LeakyRelu(leaky_slope=slope)
         output = activation.forward(x)
 
         # Check that the output is correct with the given slope

@@ -1,8 +1,7 @@
 import cupy as cp
-from base import Layer 
+from base import Activation  # Use the Activation base class
 
-
-class Relu(Layer):
+class Relu(Activation):
     """
     Implements the ReLU activation function.
     """
@@ -32,12 +31,10 @@ class Relu(Layer):
         Returns:
             cupy.ndarray: Gradient of the loss with respect to the input.
         """
-        x = self.x
-        relu_grad = x > 0
-        return grad_output * relu_grad 
+        return grad_output * (self.x > 0)  # Derivative of ReLU is 1 for x > 0, 0 otherwise
 
 
-class Sigmoid(Layer):
+class Sigmoid(Activation):
     """
     Implements the Sigmoid activation function.
     """
@@ -55,7 +52,8 @@ class Sigmoid(Layer):
             cupy.ndarray: The result after applying Sigmoid (1 / (1 + exp(-x))).
         """
         self.x = x
-        return 1.0 / (1.0 + cp.exp(-x))
+        self.sigmoid_output = 1.0 / (1.0 + cp.exp(-x))
+        return self.sigmoid_output
 
     def backward(self, grad_output):
         """
@@ -67,12 +65,11 @@ class Sigmoid(Layer):
         Returns:
             cupy.ndarray: Gradient of the loss with respect to the input.
         """
-        x = self.x
-        a = 1.0 / (1.0 + cp.exp(-x))
-        return grad_output * a * (1 - a)
+        sigmoid_grad = self.sigmoid_output * (1 - self.sigmoid_output)
+        return grad_output * sigmoid_grad  # Chain rule: grad_output * sigmoid'(x)
 
 
-class Tanh(Layer):
+class Tanh(Activation):
     """
     Implements the Tanh activation function.
     """
@@ -103,18 +100,17 @@ class Tanh(Layer):
         Returns:
             cupy.ndarray: Gradient of the loss with respect to the input.
         """
-        d = 1 - cp.square(self.a)
-        return grad_output * d
+        return grad_output * (1 - self.a ** 2)  # Derivative of Tanh: 1 - tanh(x)^2
 
 
-class Leaky_relu(Layer):
+class LeakyRelu(Activation):
     """
     Implements the Leaky ReLU activation function.
     
     Attributes:
         leaky_slope (float): The slope of the activation function for x <= 0.
     """
-    def __init__(self, leaky_slope):
+    def __init__(self, leaky_slope=0.01):
         """
         Initializes the Leaky ReLU activation.
         
@@ -135,7 +131,7 @@ class Leaky_relu(Layer):
             cupy.ndarray: The result after applying Leaky ReLU (max(leaky_slope * x, x)).
         """
         self.x = x
-        return cp.maximum(self.leaky_slope * x, x)
+        return cp.where(x > 0, x, self.leaky_slope * x)  # Leaky ReLU: max(leaky_slope * x, x)
 
     def backward(self, grad_output):
         """
@@ -147,8 +143,6 @@ class Leaky_relu(Layer):
         Returns:
             cupy.ndarray: Gradient of the loss with respect to the input.
         """
-        x = self.x
-        d = cp.zeros_like(x)
-        d[x <= 0] = self.leaky_slope
-        d[x > 0] = 1
-        return grad_output * d
+        grad_input = cp.ones_like(self.x)
+        grad_input[self.x <= 0] = self.leaky_slope
+        return grad_output * grad_input  # Derivative of Leaky ReLU: 1 for x > 0, leaky_slope for x <= 0
