@@ -3,7 +3,7 @@
 Welcome to **SilvaXNet**, the next evolution of **SilvaNet**! Now, with built-in **GPU acceleration via CuPy**, SilvaXNet provides a seamless deep learning experience for both CPU and GPU users. Whether you're an AI enthusiast, researcher, or educator, this library offers a **lightweight, intuitive**, and **educational** deep learning framework that runs efficiently on **both CPU (NumPy) and GPU (CuPy)**.
 
 <p align="center">
-  <img src="NN.png" alt="Quantization Overview">
+  <img src="silvaxnet.png" alt="Quantization Overview">
 </p>
 
 ---
